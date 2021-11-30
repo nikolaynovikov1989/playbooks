@@ -1,22 +1,21 @@
-- name: Configure webserver with nginx
+- name: Configure webserver witch nginx
   hosts: webservers
-  become: Тгuе
+  become: True
   tasks:
-    - name: install nginx
-      apt: naмe=nginx update_cache=yes
+     - name: install
+       apt: name=nginx update_cache=yes
 
-    - name: сору nginx config file
-      сору: src=files/nginx.conf dest=/etc/nginx/sites-available/default
+     - name: copy nginx congig file
+       copy: src=files/ngings.conf dest=/etc/nginx/sites-available/default
 
-    - name: enable configuration
-      file: >
-        dest=/etc/nginx/sites-enabled/default
-        src=/etc/nginx/sites-available/default
-        state=link
+     - name: enable configurator
+       file: >
+         dest=/etc/nginx/sites-enabled/default
+         src=/etc/nginx/sites-available/default
+         state=link
 
-    - name: сору index.htмl
-      teмplate: src=teмplates/index.htмl.j2 dest=/usr/share/nginx/htмl/index.htмl
-        моdе=0644
-
-    - name: restart nginx
-      service: name=nginx state=restaгted
+     - name: copy index.html
+       template: src=templates/index.html.j2 dest=/usr/share/nginx/html/index.html
+         mode=0644
+     - name: restart nginx
+       service: name=nginx state=restarted
